@@ -8,7 +8,7 @@ public enum Valid {
     MAX_HEIGHT(300),
     MIN_WEIGHT(5),
     MAX_WEIGHT(1000),
-    STUDENT_ID_LENGTH(10), 
+    STUDENT_ID_LENGTH(10),
     MAX_SCHOOL_NAME_LENGTH(200), 
     START_YEAR(1900), 
     MIN_GPA(0.0), 

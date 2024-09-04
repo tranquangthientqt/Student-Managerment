@@ -1,7 +1,6 @@
 package model;
 
-import utils.CheckValid;
-
+import java.time.LocalDate;
 public class Student extends Person {
     private String studentId;
     private String university;
@@ -12,7 +11,7 @@ public class Student extends Person {
         super();
     }
 
-    public Student(String name, String dob, String address, Double height, Double weight, String studentId, String university, int yearOfEntry, Double gpa) {
+    public Student(String name, LocalDate dob, String address, Double height, Double weight, String studentId, String university, int yearOfEntry, Double gpa) {
         super(name, dob, address, height, weight);
         setStudentId(studentId);
         setUniversity(university);
@@ -22,35 +21,19 @@ public class Student extends Person {
 
 
     private void setStudentId(String studentId) {
-        if (CheckValid.checkStudentId(studentId)) {
-            this.studentId = studentId;
-        } else {
-            throw new IllegalArgumentException("Student ID is invalid");
-        }
+        this.studentId = studentId;
     }
 
     private void setUniversity(String university) {
-        if (CheckValid.checkUniversity(university)) {
-            this.university = university;
-        } else {
-            throw new IllegalArgumentException("University is invalid");
-        }
+        this.university = university;
     }
 
     private void setYearOfEntry(int yearOfEntry) {
-        if (CheckValid.checkYearOfEntry(yearOfEntry)) {
-            this.yearOfEntry = yearOfEntry;
-        } else {
-            throw new IllegalArgumentException("Year of entry is invalid");
-        }
+        this.yearOfEntry = yearOfEntry;
     }
 
     private void setGpa(Double gpa) {
-        if (CheckValid.checkGpa(gpa)) {
-            this.gpa = gpa; 
-        } else {
-            throw new IllegalArgumentException("GPA is invalid");
-        }
+        this.gpa = gpa; 
     }
 
     public String getStudentId() {

@@ -1,46 +1,49 @@
 package menu;
 
-import java.util.Scanner;
-import manager.StudentManager;
+import utils.Validator;
+
+import java.util.ArrayList;
 
 public class Menu { 
-    private static StudentManager studentManager = new StudentManager();
-    public static void showMenu() {
-        System.out.println("========== MENU ==========");
-        System.out.println("1. Add student");
-        System.out.println("2. Update student");
-        System.out.println("3. Delete student");
-        System.out.println("4. Search student");
-        System.out.println("5. Show student");
-        System.out.println("6. Sort student by gpa");
-        System.out.println("7. Exit");
-        System.out.println("==========================");
-        System.out.print("Enter your choice: ");
+   
+    private ArrayList<String> options = new ArrayList<>();
+    private String menuTitle;
+
+    public Menu(){
+        this.menuTitle = "Student Management";
+        initializeMenu(); // Gọi phương thức để thêm các tùy chọn vào menu
     }
 
-    public static void run(Scanner sc) {
-        int choice = -1; // Initialize choice to an invalid value
-        do {
-            showMenu();
-            try {
-                choice = Integer.parseInt(sc.nextLine()); // Read input as a string and parse to integer
-                switch (choice) {
-                    case 1:
-                        studentManager.addStudent(sc);
-                        break;
-                    case 5:
-                        studentManager.showStudents();
-                        break;
-                    case 7:
-                        System.out.println("Exiting...");
-                        break;
-                    default:
-                        System.out.println("Invalid choice. Please try again.");
-                        break;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a valid number.");
-            }
-        } while (choice != 7);
+    public void addOption(String option){
+        options.add(option);
+    }
+
+    public void initializeMenu(){
+        addOption("1. Add student");
+        addOption("2. Update student");
+        addOption("3. Delete student");
+        addOption("4. Search student");
+        addOption("5. Show student");
+        addOption("6. Sort student by gpa");
+        addOption("7. Exit");
+    }
+
+    public void showMenu() {
+        if (options.isEmpty()) {
+            System.out.println("There is no item in the menu");
+            return;
+        }
+        System.out.println("\n=============================================");
+        System.out.println("Welcome to " + menuTitle);
+        for (String x : options)
+            System.out.println(x); 
+    }
+    
+    public int getChoice(){
+        int maxOption = options.size();
+        String inputMsg = "Choose [1.." + maxOption + "]: ";
+        String errorMsg = "Invalid choice. Please enter a valid number (" + 1 + " - " + maxOption + "): ";
+        int choice = Validator.getNumber(inputMsg, errorMsg, 1, maxOption);
+        return choice;
     }
 }

@@ -1,10 +1,6 @@
 package model;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-import enums.Valid;
-import utils.CheckValid;
 
 public class Person {
     private static int count = 1;
@@ -15,13 +11,11 @@ public class Person {
     protected Double height;
     protected Double weight;
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
     public Person() {
         this.id = count++;
     }
 
-    public Person(String name, String dob, String address, Double height, Double weight) {
+    public Person(String name, LocalDate dob, String address, Double height, Double weight) {
         this.id = count++;
         setName(name);
         setDob(dob);
@@ -31,64 +25,23 @@ public class Person {
     }
 
     private void setName(String name) {
-        try {
-            if (CheckValid.checkName(name)) {
-                this.name = name;
-            } else {
-                throw new Exception("Name is too long");
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        this.name = name;
     }
 
-    private void setDob(String dob) {
-        try {
-            LocalDate date = LocalDate.parse(dob, formatter);
-            if (date.getYear() <= Valid.DOB_YEAR.getValue()) {
-                throw new Exception("Year of birth is invalid");
-            } else {
-                this.dob = date;
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    private void setDob(LocalDate dob) {
+        this.dob = dob;
     }
 
     private void setAddress(String address) {
-        try {
-            if (CheckValid.checkAddress(address)) {
-                this.address = address;
-            } else {
-                throw new Exception("Address is too long");
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        this.address = address;
     }
 
     private void setHeight(Double height) {
-        try {
-            if (CheckValid.checkHeight(height)) {
-                throw new Exception("Height is invalid");
-            } else {
-                this.height = height;
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        this.height = height;
     }
 
     private void setWeight(Double weight) {
-        try {
-            if (CheckValid.checkWeight(weight)) {
-                throw new Exception("Weight is invalid");
-            } else {
-                this.weight = weight;
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        this.weight = weight;
     }
 
     public int getId() {
