@@ -38,13 +38,26 @@ public class Validator {
         String studentId;
         while (true) {
             System.out.print(inputMsg);
-            studentId = sc.nextLine();
+            studentId = sc.nextLine().toLowerCase();
             if (studentId.length() != length) {
                 System.out.println(errorMsg);
             } else if (!studentId.matches(regex)) {
-                System.out.println("Student ID only contain letters and numbers");
+                System.out.println("The format of id is STUDENTXXX (X stands for a digit)");
             } else {
                 return studentId;
+            }
+        }
+    }
+
+    public static String getString(String inputMsg, String errorMsg) {
+        String str;
+        while (true) {
+            System.out.print(inputMsg);
+            str = sc.nextLine();
+            if (str.isEmpty()) {
+                System.out.println(errorMsg);
+            } else {
+                return str;
             }
         }
     }
@@ -78,11 +91,21 @@ public class Validator {
             }
         }
     }
+    // header
+    public static String header() {
+        return String.format(format(), 
+        "ID", "Name", "Date of Birth", "Address", "Height", "Weight", "Student ID", "University", "Year of Entry", "GPA");
+    }
+    
+    //format
+    public static String format() {
+        return "|%-12s| %-12s | %-12s | %-12s | %6s | %6s | %-12s | %-12s | %-12s | %4s |\n";
+    }
     public static void main(String[] args) {
-        // System.out.println(getNumber("Enter student year of entry (1900-2024): ", "Year of entry must be between 1900 and 2024", 1900, 2024));
-        // System.out.println(getNumber("Enter a number (1.5-5.5): ", "Number must be between 1.5 and 5.5", 1.5, 5.5));
+        //System.out.println(getNumber("Enter student year of entry (1900-2024): ", "Year of entry must be between 1900 and 2024", 1900, 2024));
+        //System.out.println(getNumber("Enter a number (1.5-5.5): ", "Number must be between 1.5 and 5.5", 1.5, 5.5));
 
-        //System.out.println(getStudentId("Enter student ID (10 characters): ", "Student ID must be 10 characters", 10, "^[a-zA-Z0-9]+$"));
-        System.out.println(getDate("Enter date (dd/MM/yyyy): ", "Invalid date. Please enter a valid date."));
+        //System.out.println(getStudentId("Enter student ID (10 characters): ", "Student ID must be 10 characters", 10, "^[Ss]tudent\\d{3}$"));
+        //System.out.println(getDate("Enter date (dd/MM/yyyy): ", "Invalid date. Please enter a valid date."));
     }
 }

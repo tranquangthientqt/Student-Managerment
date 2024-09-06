@@ -1,6 +1,8 @@
 package model;
 
 import java.time.LocalDate;
+
+import utils.Validator;
 public class Student extends Person {
     private String studentId;
     private String university;
@@ -64,7 +66,7 @@ public class Student extends Person {
     }
 
     public void showInfo() {
-        System.out.printf("%-12s %-12s %-12s %-12s %-12s %-12s %-12s %-12s %-12s %-12s\n", 
+        System.out.printf(Validator.format(), 
         id, name, dob, address, height, weight, studentId, university, yearOfEntry, gpa);
     }
 }

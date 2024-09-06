@@ -19,11 +19,11 @@ public class Menu {
     }
 
     public void initializeMenu(){
-        addOption("1. Add student");
-        addOption("2. Update student");
-        addOption("3. Delete student");
-        addOption("4. Search student");
-        addOption("5. Show student");
+        addOption("1. Add new student");
+        addOption("2. Search student by id");
+        addOption("3. Update student");
+        addOption("4. Remove student");
+        addOption("5. Show list student");
         addOption("6. Sort student by gpa");
         addOption("7. Exit");
     }

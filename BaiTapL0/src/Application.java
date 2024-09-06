@@ -19,6 +19,12 @@ public class Application {
                     case 1:
                         studentManager.addStudent();
                         break;
+                    case 2:
+                        studentManager.searchStudentById();
+                        break;
+                    case 4:
+                        studentManager.removeStudent();
+                        break;
                     case 5:
                         studentManager.showStudents();
                         break;
