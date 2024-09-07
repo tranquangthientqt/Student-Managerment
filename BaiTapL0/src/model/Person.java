@@ -2,6 +2,9 @@ package model;
 
 import java.time.LocalDate;
 
+import utils.Validator;
+
+
 public class Person {
     private static int count = 1;
     protected final int id;
@@ -24,23 +27,23 @@ public class Person {
         setWeight(weight);
     }
 
-    private void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    private void setDob(LocalDate dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 
-    private void setAddress(String address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    private void setHeight(Double height) {
+    public void setHeight(Double height) {
         this.height = height;
     }
 
-    private void setWeight(Double weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 
@@ -70,13 +73,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", dob=" + dob +
-                ", address='" + address + '\'' +
-                ", height=" + height +
-                ", weight=" + weight +
-                '}';
+        return String.format(Validator.format(), 
+        id, name, dob, address, height, weight);
     }
 }

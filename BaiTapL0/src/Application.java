@@ -1,12 +1,25 @@
 import manager.StudentManager;
 import menu.Menu;
+import config.SeedData;
 
 public class Application {
-    private static Menu menu = new Menu();
+    private static Menu menu = new Menu("Student Management");
     private static StudentManager studentManager = new StudentManager();
+    private static SeedData seedData = new SeedData(studentManager);
     
+    public static void initializeMenu(){
+        menu.addOption("1. Add new student");
+        menu.addOption("2. Search student by id");
+        menu.addOption("3. Update student");
+        menu.addOption("4. Remove student");
+        menu.addOption("5. Show list student");
+        menu.addOption("6. Sort student by gpa");
+        menu.addOption("7. Exit");
+    }
+
     public static void run(Class<?> mainClass) {
-        mainClass.getClassLoader();
+        seedData.run();
+        initializeMenu();
         runMenu();
     }
     private static void runMenu(){
@@ -22,11 +35,17 @@ public class Application {
                     case 2:
                         studentManager.searchStudentById();
                         break;
+                    case 3:
+                        studentManager.updateStudent();
+                        break;
                     case 4:
                         studentManager.removeStudent();
                         break;
                     case 5:
                         studentManager.showStudents();
+                        break;
+                    case 6:
+                        studentManager.sortStudentsByGpa();
                         break;
                     case 7:
                         System.out.println("Exiting...");

@@ -22,19 +22,19 @@ public class Student extends Person {
     }
 
 
-    private void setStudentId(String studentId) {
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
 
-    private void setUniversity(String university) {
+    public void setUniversity(String university) {
         this.university = university;
     }
 
-    private void setYearOfEntry(int yearOfEntry) {
+    public void setYearOfEntry(int yearOfEntry) {
         this.yearOfEntry = yearOfEntry;
     }
 
-    private void setGpa(Double gpa) {
+    public void setGpa(Double gpa) {
         this.gpa = gpa; 
     }
 
