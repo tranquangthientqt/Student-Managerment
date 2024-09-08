@@ -3,6 +3,8 @@ package config;
 import manager.StudentManager;
 import model.Student; // Import the Student model
 import java.time.LocalDate;
+import java.util.Random;
+
 public class SeedData {
     private final StudentManager studentManager;
 
@@ -10,24 +12,25 @@ public class SeedData {
         this.studentManager = studentManager;
     }
 
-    public void run() {
-        System.out.println("Seed data");
+    public void generateRandomStudents(int numStudents) {
+        Random random = new Random();
 
-        // Create fake student data
-        Student student1 = new Student("John Doe", LocalDate.of(2000, 1, 1), "Address1", 110.0, 60.0, "student001", "University1", 2020, 7.2);
-        Student student2 = new Student("Forester", LocalDate.now(), "Address1", 170.0, 60.0, "student002", "University2", 2021, 3.5);
-        Student student3 = new Student("Wayne", LocalDate.now(), "Address1", 170.0, 60.0, "student003", "University3", 2022, 5.2);
-        Student student4 = new Student("John Doe", LocalDate.of(2000, 1, 1), "Address1", 110.0, 60.0, "student001", "University1", 2020, 6.4);
-        Student student5 = new Student("Kim", LocalDate.now(), "Address7", 170.0, 60.0, "student002", "University2", 2021, 8.7);
-        Student student6 = new Student("Dogg", LocalDate.now(), "Address8", 170.0, 60.0, "student003", "University3", 2022, 2.6);
+        String[] names = {"Alice", "Bob", "Charlie", "David", "Eve", "Frank", "Grace", "Henry", "Ivy", "Jack"};
+        String[] addresses = {"123 Main St", "456 Elm St", "789 Oak St", "321 Pine St", "654 Cedar St"};
+        String[] universities = {"Stanford University", "Harvard University", "MIT", "Caltech", "Princeton University"};
 
-        // Add students to the manager
-        studentManager.addStudent(student1);
-        studentManager.addStudent(student2);
-        studentManager.addStudent(student3);
-        studentManager.addStudent(student4);
-        studentManager.addStudent(student5);
-        studentManager.addStudent(student6);
-        System.out.println("Fake data added");
+        for (int i = 0; i < numStudents; i++) {
+            String name = names[random.nextInt(names.length)];
+            LocalDate dob = LocalDate.now().minusYears(18 + random.nextInt(5)); // Age between 18 and 22
+            String address = addresses[random.nextInt(addresses.length)];
+            double height = 150 + random.nextDouble() * 30; // Height between 150cm and 180cm
+            double weight = 50 + random.nextDouble() * 30; // Weight between 50kg and 80kg
+            String studentId = String.format("student%03d", i + 1);
+            String university = universities[random.nextInt(universities.length)];
+            int yearOfEntry = LocalDate.now().getYear() - random.nextInt(4); // Year of entry within the last 4 years
+            double gpa = random.nextDouble() * 10; // GPA between 2.0 and 4.0
+
+            studentManager.addStudent(new Student(name, dob, address, height, weight, studentId, university, yearOfEntry, gpa));
+        }
     }
 }

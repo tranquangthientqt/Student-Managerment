@@ -3,7 +3,7 @@ package manager;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import enums.AcademicPerformance;
 import enums.Valid;
 import menu.Menu;
 
@@ -22,6 +22,7 @@ public class StudentManager {
         menu.addOption("3 - Update address");
         menu.addOption("4 - Update height");
         menu.addOption("5 - Update weight");
+        menu.addOption("6 - Update gpa");
     }
     // add new student
     /*
@@ -73,7 +74,7 @@ public class StudentManager {
             x = searchStudentObjectById(studentId);
             if (x == null) {
                 System.out.println("Not found student with id " + studentId + " in the list. Please try again.");
-            } 
+            }
             else {
                 initializeMenu();
                 menu.showMenu();
@@ -94,6 +95,9 @@ public class StudentManager {
                         break;
                     case 5:
                         updateStudent.updateWeight();
+                        break;
+                    case 6:
+                        updateStudent.updateGpa();
                         break;
                 }
                 System.out.println("Student updated successfully. Here is the student information after update:");
@@ -166,6 +170,17 @@ public class StudentManager {
             }
         }
         return -1;
+    }        
+
+    //lấy danh sách sinh viên theo hạng thi đua
+    public List<Student> getStudentsByAcademicRank(String rank) {
+        List<Student> studentsByRank = new ArrayList<>();
+        for (Student student : students) {
+            if (student.getAcademicPerformance().toString().equalsIgnoreCase(rank)) {
+                studentsByRank.add(student);
+            }
+        }
+        return studentsByRank;
     }
 
     public void showStudents() {
@@ -180,8 +195,30 @@ public class StudentManager {
     }
 
     public void sortStudentsByGpa() {
+        if (students.isEmpty()) {
+            System.out.println("No students in the list.");
+            return;
+        }
         students.sort((s1, s2) -> Double.compare(s2.getGpa(), s1.getGpa()));
         System.out.println("Students sorted by GPA.");
         showStudents();
+    }
+
+    public void searchStudentByAcademicRank() {
+        String rank;
+        AcademicPerformance[] ranks = AcademicPerformance.values();
+        List<Student> studentsByRank = new ArrayList<>();
+        
+            rank = Validator.getString("Enter academic rank (POOR, WEAK, AVERAGE, FAIR, GOOD, EXCELLENT): ", "Academic rank must be POOR, WEEK, AVERAGE, GOOD, or EXCELLENT.", ranks);
+            studentsByRank = getStudentsByAcademicRank(rank);
+            if (studentsByRank.isEmpty()) {
+                System.out.println("No students in the list.");
+            } else {
+                System.out.println("Here is the list of students with the academic rank " + rank + ":");
+                System.out.println(Validator.header());
+                for (Student student : studentsByRank) {
+                    student.showInfo();
+                }
+            }
     }
 }

@@ -2,13 +2,14 @@ package model;
 
 import java.time.LocalDate;
 
+import enums.AcademicPerformance;
 import utils.Validator;
 public class Student extends Person {
     private String studentId;
     private String university;
     private int yearOfEntry;
     private Double gpa;
-    
+    private AcademicPerformance academicPerformance;
     public Student() {
         super();
     }
@@ -21,6 +22,22 @@ public class Student extends Person {
         setGpa(gpa);
     }
 
+
+    private void updateAcademicPerformance() {
+        if (gpa < 3) {
+            academicPerformance = AcademicPerformance.POOR;
+        } else if (gpa < 5) {
+            academicPerformance = AcademicPerformance.WEAK;
+        } else if (gpa < 6.5) {
+            academicPerformance = AcademicPerformance.AVERAGE;
+        } else if (gpa < 7.5) {
+            academicPerformance = AcademicPerformance.FAIR;
+        } else if (gpa < 9) {
+            academicPerformance = AcademicPerformance.GOOD;
+        } else {
+            academicPerformance = AcademicPerformance.EXCELLENT;
+        }
+    }
 
     public void setStudentId(String studentId) {
         this.studentId = studentId;
@@ -35,7 +52,8 @@ public class Student extends Person {
     }
 
     public void setGpa(Double gpa) {
-        this.gpa = gpa; 
+        this.gpa = gpa;
+        updateAcademicPerformance();
     }
 
     public String getStudentId() {
@@ -54,6 +72,10 @@ public class Student extends Person {
         return gpa;
     }
 
+    public AcademicPerformance getAcademicPerformance() {
+        return academicPerformance;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -61,12 +83,13 @@ public class Student extends Person {
                 ", university='" + university + '\'' +
                 ", yearOfEntry=" + yearOfEntry +
                 ", gpa=" + gpa +
+                ", academicPerformance=" + academicPerformance +
                 super.toString() +
                 '}';
     }
 
     public void showInfo() {
         System.out.printf(Validator.format(), 
-        id, name, dob, address, height, weight, studentId, university, yearOfEntry, gpa);
+        id, name, dob, address, String.format("%.2f", height), String.format("%.2f", weight), studentId, university, yearOfEntry, String.format("%.2f", gpa), academicPerformance);
     }
 }

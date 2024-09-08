@@ -37,4 +37,8 @@ public class UpdateStudent {
         double weight = Validator.getNumber("Enter student weight: ", "Weight must be between 5.0 and 1000.0", Valid.MIN_WEIGHT.getValue(), Valid.MAX_WEIGHT.getValue());
         student.setWeight(weight);
     }
+    public void updateGpa(){
+        double gpa = Validator.getNumber("Enter new gpa: ", "Gpa must be between 0.0 and 10.0", 0, 10.0);
+        student.setGpa(gpa);
+    }
 }

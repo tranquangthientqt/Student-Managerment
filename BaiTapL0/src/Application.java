@@ -14,11 +14,12 @@ public class Application {
         menu.addOption("4. Remove student");
         menu.addOption("5. Show list student");
         menu.addOption("6. Sort student by gpa");
-        menu.addOption("7. Exit");
+        menu.addOption("7. Search student by academic rank");
+        menu.addOption("8. Exit");
     }
 
     public static void run(Class<?> mainClass) {
-        seedData.run();
+        seedData.generateRandomStudents(10);
         initializeMenu();
         runMenu();
     }
@@ -48,6 +49,9 @@ public class Application {
                         studentManager.sortStudentsByGpa();
                         break;
                     case 7:
+                        studentManager.searchStudentByAcademicRank();
+                        break;
+                    case 8:
                         System.out.println("Exiting...");
                         break;
                     default:
@@ -57,6 +61,6 @@ public class Application {
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a valid number.");
             }
-        } while (choice != 7);
+        } while (choice != 8);
     }
 }
